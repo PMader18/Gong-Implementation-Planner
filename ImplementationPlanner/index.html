@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gong Implementation Wizard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-left">
+      <h1>Gong Implementation Wizard</h1>
+      <span class="subtitle">From handoff questionnaire → project plan → status dashboard</span>
+    </div>
+    <button id="themeToggle" type="button" class="btn-outline small">🌗 Theme</button>
+  </header>
+
+  <nav class="steps-nav">
+    <button class="step-tab active" data-step="1">
+      <span class="step-index">1</span>
+      Project &amp; Handoff
+    </button>
+    <button class="step-tab" data-step="2">
+      <span class="step-index">2</span>
+      Implementation Plan
+    </button>
+    <button class="step-tab" data-step="3">
+      <span class="step-index">3</span>
+      Status Dashboard
+    </button>
+  </nav>
+
+  <main class="main">
+    <!-- STEP 1: PROJECT / HANDOFF -->
+    <section id="step-1" class="step-panel active">
+      <form id="handoffForm" class="grid grid-2">
+        <div class="card">
+          <h2>Project Information</h2>
+          <div class="field-row">
+            <label>Client / Account Name</label>
+            <input type="text" name="companyName" required />
+          </div>
+          <div class="field-row grid grid-2">
+            <div>
+              <label>Primary Contact(s)</label>
+              <input type="text" name="mainPocs" />
+            </div>
+            <div>
+              <label>Program Manager</label>
+              <input type="text" name="programManager" />
+            </div>
+          </div>
+          <div class="field-row grid grid-3">
+            <div>
+              <label>AE</label>
+              <input type="text" name="ae" />
+            </div>
+            <div>
+              <label>CSM</label>
+              <input type="text" name="csm" />
+            </div>
+            <div>
+              <label>PS Consultant</label>
+              <input type="text" name="ps" />
+            </div>
+          </div>
+          <div class="field-row grid grid-2">
+            <div>
+              <label>Target Go-Live Date</label>
+              <input type="date" name="goLive" />
+            </div>
+            <div>
+              <label>Seats Purchased</label>
+              <input type="text" name="seats" />
+            </div>
+          </div>
+          <div class="field-row">
+            <label>Notes / Risks / Context</label>
+            <textarea name="notes" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Products Purchased</h2>
+          <p class="helper">Select the SKUs in scope for this project. Foundations, Engage, Forecast, and Enable each generate their own call flow.</p>
+
+          <!-- Foundations -->
+          <div class="product-group">
+            <div class="product-header">
+              <input type="checkbox" id="group-foundations" />
+              <label for="group-foundations">Foundations</label>
+            </div>
+            <div id="foundations-skus" class="sku-options hidden">
+              <label class="check-inline">
+                <input type="checkbox" name="products" value="foundation-qs" />
+                <span>Quickstart</span>
+              </label>
+              <label class="check-inline">
+                <input type="checkbox" name="products" value="foundation-pro" />
+                <span>Professional</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Engage -->
+          <div class="product-group">
+            <div class="product-header">
+              <input type="checkbox" id="group-engage" />
+              <label for="group-engage">Engage</label>
+            </div>
+            <div id="engage-skus" class="sku-options hidden">
+              <label class="check-inline">
+                <input type="checkbox" name="products" value="engage-qs" />
+                <span>Quickstart</span>
+              </label>
+              <label class="check-inline">
+                <input type="checkbox" name="products" value="engage-plus" />
+                <span>Plus</span>
+              </label>
+              <label class="check-inline">
+                <input type="checkbox" name="products" value="engage-pro" />
+                <span>Professional</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Forecast -->
+          <div class="product-group">
+            <div class="product-header">
+              <input type="checkbox" id="group-forecast" />
+              <label for="group-forecast">Forecast</label>
+            </div>
+            <div id="forecast-skus" class="sku-options hidden">
+              <label class="check-inline">
+                <input type="checkbox" name="products" value="forecast-qs" />
+                <span>Quickstart</span>
+              </label>
+              <label class="check-inline">
+                <input type="checkbox" name="products" value="forecast-pro" />
+                <span>Professional</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Enable -->
+          <div class="product-group">
+            <div class="product-header">
+              <input type="checkbox" id="group-enable" />
+              <label for="group-enable">Enable</label>
+            </div>
+            <input type="checkbox" name="products" value="enable" id="sku-enable" class="hidden" />
+          </div>
+
+          <div class="field-row">
+            <label>Primary Outcomes (optional)</label>
+            <div class="check-row">
+              <label class="check-inline"><input type="checkbox" name="outcomes" value="Ramp Time" /> <span>Ramp Time</span></label>
+              <label class="check-inline"><input type="checkbox" name="outcomes" value="Rep Productivity" /> <span>Rep Productivity</span></label>
+              <label class="check-inline"><input type="checkbox" name="outcomes" value="Forecast Accuracy" /> <span>Forecast Accuracy</span></label>
+              <label class="check-inline"><input type="checkbox" name="outcomes" value="Retention" /> <span>Retention</span></label>
+            </div>
+            <p class="helper">If no outcomes are selected, all tasks for the SKU(s) will still be included.</p>
+          </div>
+        </div>
+
+        <div class="card full-span">
+          <h2>Tech Stack &amp; Handoff Notes</h2>
+          <div class="grid grid-3">
+            <div>
+              <label>CRM</label>
+              <div class="check-column">
+                <label class="check-inline"><input type="radio" name="crm" value="salesforce" /> <span>Salesforce</span></label>
+                <label class="check-inline"><input type="radio" name="crm" value="hubspot" /> <span>HubSpot</span></label>
+                <label class="check-inline"><input type="radio" name="crm" value="dynamics" /> <span>MS Dynamics</span></label>
+                <label class="check-inline"><input type="radio" name="crm" value="other" /> <span>Other</span></label>
+                <input type="text" name="crmOther" placeholder="If other, specify..." />
+              </div>
+            </div>
+            <div>
+              <label>Meetings &amp; Email</label>
+              <div class="check-column">
+                <label class="check-inline"><input type="checkbox" name="meet" value="zoom" /> <span>Zoom</span></label>
+                <label class="check-inline"><input type="checkbox" name="meet" value="gmeet" /> <span>Google Meet</span></label>
+                <label class="check-inline"><input type="checkbox" name="meet" value="teams" /> <span>Microsoft Teams</span></label>
+                <label class="check-inline"><input type="checkbox" name="meet" value="other" /> <span>Other</span></label>
+                <input type="text" name="meetOther" placeholder="If other, specify..." />
+              </div>
+            </div>
+            <div>
+              <label>Dialer / SEP</label>
+              <div class="check-column">
+                <label class="check-inline"><input type="checkbox" name="dialer" value="salesloft" /> <span>Salesloft</span></label>
+                <label class="check-inline"><input type="checkbox" name="dialer" value="ringcentral" /> <span>RingCentral</span></label>
+                <label class="check-inline"><input type="checkbox" name="dialer" value="openphone" /> <span>OpenPhone</span></label>
+                <label class="check-inline"><input type="checkbox" name="dialer" value="hubspot-dialer" /> <span>HubSpot Dialer</span></label>
+                <label class="check-inline"><input type="checkbox" name="dialer" value="other" /> <span>Other</span></label>
+                <input type="text" name="dialerOther" placeholder="If other, specify..." />
+              </div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label>Other Integrations</label>
+            <div class="check-row">
+              <label class="check-inline"><input type="checkbox" name="otherInt" value="slack" /> <span>Slack</span></label>
+              <label class="check-inline"><input type="checkbox" name="otherInt" value="linkedin-sn" /> <span>LinkedIn Sales Nav</span></label>
+              <label class="check-inline"><input type="checkbox" name="otherInt" value="other" /> <span>Other</span></label>
+            </div>
+            <input type="text" name="otherIntOther" placeholder="If other, specify..." />
+          </div>
+
+          <div class="field-row">
+            <label>Additional Handoff Notes</label>
+            <textarea name="handoffNotes" rows="3" placeholder="Anything AE / CSM has learned about culture, constraints, or risks."></textarea>
+          </div>
+
+          <div class="button-row">
+            <button type="button" id="exportHandoffDoc" class="btn-outline">Export Handoff Questionnaire (Doc)</button>
+            <span class="helper">Saved file name: <code>{ClientName}+Handoff Questionnaire</code></span>
+          </div>
+        </div>
+      </form>
+
+      <div class="footer-actions">
+        <button type="button" id="toStep2" class="btn-primary">Continue to Implementation Plan →</button>
+      </div>
+    </section>
+
+    <!-- STEP 2: IMPLEMENTATION PLAN -->
+    <section id="step-2" class="step-panel">
+      <div id="planHeader" class="card meta-card">
+        <h2>Implementation Plan</h2>
+        <p class="helper">This view is generated from the handoff selections and SKU(s). Each call is its own collapsible section with task-level status tracking.</p>
+        <div id="planMeta"></div>
+        <div class="button-row">
+          <button type="button" id="exportPlanCsv" class="btn-outline small">Export Tasks (CSV for Excel)</button>
+          <button type="button" id="exportPlanHtml" class="btn-outline small">Export Plan (HTML)</button>
+          <button type="button" id="exportPlanMd" class="btn-outline small">Export Plan (Markdown)</button>
+          <button type="button" id="exportPlanDoc" class="btn-outline small">Export Plan (Doc)</button>
+        </div>
+      </div>
+
+      <div id="planContainer"></div>
+
+      <div class="footer-actions">
+        <button type="button" class="btn-outline" id="backToStep1">← Back to Handoff</button>
+        <button type="button" class="btn-primary" id="toStep3">Continue to Status Dashboard →</button>
+      </div>
+    </section>
+
+    <!-- STEP 3: STATUS DASHBOARD -->
+    <section id="step-3" class="step-panel">
+      <div class="card meta-card">
+        <h2>Project Status Dashboard</h2>
+        <p class="helper">Visual representation of progress at task / call / product level. Charts update as you change statuses on the Implementation Plan page.</p>
+        <div id="dashboardMeta"></div>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card" id="viz-overall">
+          <div class="card-header-row">
+            <h3>Overall Progress</h3>
+            <button type="button" class="btn-outline tiny" data-export-viz="overall">Export Viz</button>
+          </div>
+          <div id="overallProgress"></div>
+        </div>
+
+        <div class="card" id="viz-by-product">
+          <div class="card-header-row">
+            <h3>By Product / Call</h3>
+            <button type="button" class="btn-outline tiny" data-export-viz="byProduct">Export Viz</button>
+          </div>
+          <div id="byProductProgress"></div>
+        </div>
+
+        <div class="card" id="viz-roadmap">
+          <div class="card-header-row">
+            <h3>Roadmap &amp; Timeline</h3>
+            <button type="button" class="btn-outline tiny" data-export-viz="roadmap">Export Viz</button>
+          </div>
+          <div id="roadmapTimeline"></div>
+        </div>
+      </div>
+
+      <div class="footer-actions">
+        <button type="button" class="btn-outline" id="backToStep2">← Back to Plan</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
