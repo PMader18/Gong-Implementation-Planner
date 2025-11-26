@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Gong Implementation Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="app.js"></script>
+</head>
+
+<body>
+  <header class="app-header">
+    <h1>Gong Implementation Builder</h1>
+    <button id="themeToggle" type="button" class="btn-secondary small">Toggle Theme</button>
+  </header>
+
+  <!-- Step Tabs -->
+  <nav class="step-nav">
+    <button class="step-tab active" data-step="1">1. Project Info & Handoff</button>
+    <button class="step-tab" data-step="2">2. Implementation Plan</button>
+    <button class="step-tab" data-step="3">3. Status & Visuals</button>
+  </nav>
+
+  <main class="app-main">
+
+    <!-- STEP 1: PROJECT INFO + HANDOFF -->
+    <section id="step-1" class="step-panel active">
+      <form id="handoffForm" class="stack gap-lg">
+
+        <!-- Project Info -->
+        <section class="card">
+          <h2>Project Information</h2>
+          <div class="grid-2">
+            <div class="field-group">
+              <label for="companyName">Client / Company Name</label>
+              <input id="companyName" name="companyName" type="text" class="text-input" />
+            </div>
+            <div class="field-group">
+              <label for="goLive">Target Go-Live Date</label>
+              <input id="goLive" name="goLive" type="date" class="text-input" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field-group">
+              <label for="seats">Estimated Seats (Professional users)</label>
+              <input id="seats" name="seats" type="number" class="text-input" />
+            </div>
+            <div class="field-group">
+              <label for="mainPocs">Primary Customer Contacts</label>
+              <input id="mainPocs" name="mainPocs" type="text" class="text-input" placeholder="Name(s), title(s), email(s)" />
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="field-group">
+              <label for="programManager">Program Manager</label>
+              <input id="programManager" name="programManager" type="text" class="text-input" />
+            </div>
+            <div class="field-group">
+              <label for="ae">Account Executive</label>
+              <input id="ae" name="ae" type="text" class="text-input" />
+            </div>
+            <div class="field-group">
+              <label for="csm">Customer Success Manager</label>
+              <input id="csm" name="csm" type="text" class="text-input" />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="ps">PS Consultant / EM</label>
+            <input id="ps" name="ps" type="text" class="text-input" />
+          </div>
+
+          <div class="field-group">
+            <label for="notes">Additional Project Context</label>
+            <textarea id="notes" name="notes" class="text-area" placeholder="Anything about scope, risks, constraints, timelines, etc."></textarea>
+          </div>
+        </section>
+
+        <!-- Products & Outcomes -->
+        <section class="card">
+          <h2>Products & Outcomes</h2>
+
+          <h3>2. Products Purchased <span class="helper-inline">(Select all that apply)</span></h3>
+
+          <div class="product-group">
+            <label class="group-label">
+              <input id="group-foundations" type="checkbox" />
+              <span>Foundations</span>
+            </label>
+            <div id="foundations-skus" class="sku-options hidden">
+              <label><input type="checkbox" name="products" value="foundation-qs" /> Foundation Quickstart</label>
+              <label><input type="checkbox" name="products" value="foundation-pro" /> Foundation Professional</label>
+            </div>
+          </div>
+
+          <div class="product-group">
+            <label class="group-label">
+              <input id="group-engage" type="checkbox" />
+              <span>Engage</span>
+            </label>
+            <div id="engage-skus" class="sku-options hidden">
+              <label><input type="checkbox" name="products" value="engage-qs" /> Engage Quickstart</label>
+              <label><input type="checkbox" name="products" value="engage-plus" /> Engage Plus</label>
+              <label><input type="checkbox" name="products" value="engage-pro" /> Engage Professional</label>
+            </div>
+          </div>
+
+          <div class="product-group">
+            <label class="group-label">
+              <input id="group-forecast" type="checkbox" />
+              <span>Forecast</span>
+            </label>
+            <div id="forecast-skus" class="sku-options hidden">
+              <label><input type="checkbox" name="products" value="forecast-qs" /> Forecast Quickstart</label>
+              <label><input type="checkbox" name="products" value="forecast-pro" /> Forecast Professional</label>
+            </div>
+          </div>
+
+          <div class="product-group">
+            <label class="group-label">
+              <input id="group-enable" type="checkbox" />
+              <span>Enable</span>
+            </label>
+          </div>
+
+          <h3>Primary Outcomes <span class="helper-inline">(Optional)</span></h3>
+          <div class="checkbox-row">
+            <label><input type="checkbox" name="outcomes" value="Rep Productivity" /> Rep Productivity</label>
+            <label><input type="checkbox" name="outcomes" value="New Business" /> New Business</label>
+            <label><input type="checkbox" name="outcomes" value="Retention" /> Retention</label>
+            <label><input type="checkbox" name="outcomes" value="Forecast Accuracy" /> Forecast Accuracy</label>
+            <label><input type="checkbox" name="outcomes" value="Pipeline Generation" /> Pipeline Generation</label>
+          </div>
+        </section>
+
+        <!-- Tech Stack & Handoff -->
+        <section class="card">
+          <h2>Tech Stack & Handoff Notes</h2>
+
+          <div class="grid-3">
+            <!-- CRM -->
+            <div class="field-group">
+              <label for="crmSelect">CRM</label>
+              <select id="crmSelect" name="crmSelect" multiple class="tech-select js-multi-select">
+                <option value="Salesforce">Salesforce</option>
+                <option value="HubSpot CRM">HubSpot CRM</option>
+                <option value="Microsoft Dynamics 365">Microsoft Dynamics 365</option>
+                <option value="Freshsales">Freshsales</option>
+                <option value="Zoho CRM">Zoho CRM</option>
+                <option value="other">Other</option>
+              </select>
+
+              <input id="crmOther" type="text" class="text-input" placeholder="If other, specify..." />
+            </div>
+          </div>
+            <!-- Web Conferencing -->
+            <div class="field-group">
+              <label for="webconfSelect">Web Conferencing</label>
+              <select id="webconfSelect" name="webconfSelect" multiple class="tech-select js-multi-select">
+                <option value="Zoom">Zoom</option>
+                <option value="Google Meet">Google Meet</option>
+                <option value="Microsoft Teams">Microsoft Teams</option>
+                <option value="Cisco Webex">Cisco Webex</option>
+                <option value="GoToMeeting">GoToMeeting</option>
+              </select>
+              <input id="webconfOther" type="text" class="text-input" placeholder="If other, specify..." />
+            </div>
+
+            <!-- Telephony / SEP -->
+            <div class="field-group">
+              <label for="telephonySelect">Telephony / SEP</label>
+              <select id="telephonySelect" name="telephonySelect" multiple class="tech-select js-multi-select">
+                <option value="8x8">8x8</option>
+                <option value="Aircall">Aircall</option>
+                <option value="Amazon Connect">Amazon Connect</option>
+                <option value="Dialpad">Dialpad</option>
+                <option value="Five9">Five9</option>
+                <option value="Groove">Groove</option>
+                <option value="HubSpot Dialer">HubSpot Dialer</option>
+                <option value="Outreach">Outreach</option>
+                <option value="RingCentral">RingCentral</option>
+                <option value="Salesloft">Salesloft</option>
+                <option value="Talkdesk">Talkdesk</option>
+                <option value="Zoom Phone">Zoom Phone</option>
+              </select>
+              <input id="telephonyOther" type="text" class="text-input" placeholder="If other, specify..." />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <!-- Provisioning / Auth -->
+            <div class="field-group">
+              <label for="provisioningSelect">Provisioning / Auth</label>
+              <select id="provisioningSelect" name="provisioningSelect" multiple class="tech-select js-multi-select">
+                <option value="Google Workspace">Google Workspace</option>
+                <option value="Microsoft 365 / Entra ID">Microsoft 365 / Entra ID</option>
+                <option value="Okta">Okta</option>
+                <option value="Salesforce (IdP)">Salesforce (IdP)</option>
+                <option value="OneLogin">OneLogin</option>
+                <option value="Rippling">Rippling</option>
+                <option value="Generic SAML 2.0">Generic SAML 2.0</option>
+              </select>
+              <input id="provisioningOther" type="text" class="text-input" placeholder="If other, specify..." />
+            </div>
+
+            <!-- Other Integrations -->
+            <div class="field-group">
+              <label for="integrationsSelect">Other Integrations</label>
+              <select id="integrationsSelect" name="integrationsSelect" multiple class="tech-select js-multi-select">
+                <option value="Slack">Slack</option>
+                <option value="LinkedIn Sales Navigator">LinkedIn Sales Navigator</option>
+                <option value="Calendly">Calendly</option>
+                <option value="Chili Piper">Chili Piper</option>
+                <option value="ZoomInfo">ZoomInfo</option>
+                <option value="6sense">6sense</option>
+                <option value="Vidyard">Vidyard</option>
+                <option value="Seismic">Seismic</option>
+                <option value="Sendoso">Sendoso</option>
+              </select>
+              <input id="integrationsOther" type="text" class="text-input" placeholder="If other, specify..." />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="handoffNotes">Additional Handoff Notes</label>
+            <textarea id="handoffNotes" name="handoffNotes" class="text-area"
+              placeholder="..."></textarea>
+          </div>
+
+          <div class="export-row">
+            <button id="exportHandoffDoc" type="button" class="btn-secondary">
+              Export Handoff Questionnaire (Doc)
+            </button>
+            <span class="help-text">Saved file name: <code>{ClientName} - Handoff Questionnaire</code></span>
+          </div>
+        </section>
+
+      </form>
+
+      <footer class="step-footer">
+        <button id="toStep2" type="button" class="btn-primary">Next: Implementation Plan →</button>
+      </footer>
+    </section>
+
+    <!-- STEP 2: IMPLEMENTATION PLAN -->
+    <section id="step-2" class="step-panel">
+      <section class="card">
+        <h2>Implementation Plan</h2>
+        <div id="planMeta" class="badge-row"></div>
+      </section>
+
+      <section id="planContainer" class="stack gap-md">
+        <!-- Filled by JS -->
+      </section>
+
+      <section class="card export-bar">
+        <h3>Export Implementation Plan</h3>
+        <div class="button-row">
+          <button id="exportPlanCsv" type="button" class="btn-secondary">CSV</button>
+          <button id="exportPlanMd" type="button" class="btn-secondary">Markdown</button>
+          <button id="exportPlanHtml" type="button" class="btn-secondary">HTML</button>
+          <button id="exportPlanDoc" type="button" class="btn-secondary">Word (Doc)</button>
+        </div>
+      </section>
+
+      <footer class="step-footer">
+        <button id="backToStep1" type="button" class="btn-secondary">← Back to Project Info</button>
+        <button id="toStep3" type="button" class="btn-primary">Next: Status & Visuals →</button>
+      </footer>
+    </section>
+
+    <!-- STEP 3: STATUS & VISUALS -->
+    <section id="step-3" class="step-panel">
+      <section class="card">
+        <h2>Project Status & Visuals</h2>
+        <div id="dashboardMeta" class="badge-row"></div>
+      </section>
+
+      <section class="grid-3 equal-height">
+        <div id="viz-overall" class="card">
+          <h3>Overall Progress</h3>
+          <div id="overallProgress"></div>
+          <button class="btn-secondary small mt-sm" data-export-viz="overall">Export This Visual</button>
+        </div>
+
+        <div id="viz-by-product" class="card">
+          <h3>By Product</h3>
+          <div id="byProductProgress"></div>
+          <button class="btn-secondary small mt-sm" data-export-viz="byProduct">Export This Visual</button>
+        </div>
+
+        <div id="viz-roadmap" class="card">
+          <h3>Call Roadmap</h3>
+          <div id="roadmapTimeline"></div>
+          <button class="btn-secondary small mt-sm" data-export-viz="roadmap">Export This Visual</button>
+        </div>
+      </section>
+
+      <footer class="step-footer">
+        <button id="backToStep2" type="button" class="btn-secondary">← Back to Plan</button>
+      </footer>
+    </section>
+
+  </main>
+</body>
+</html>
