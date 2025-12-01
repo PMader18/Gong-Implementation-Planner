@@ -54,6 +54,13 @@ body.dark {
   --accent-soft: rgba(255, 149, 67, 0.25);
 }
 
+/* logo */
+
+.brand-logo {
+  height: 32px;  
+  width: auto;
+}
+
 /* Layout */
 
 .app-header {
