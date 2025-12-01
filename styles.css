@@ -68,8 +68,8 @@ body.dark {
 }
 
 .app-header .brand-logo {
-  height: 32px;  
-  width: auto;
+  height: auto;
+  width: min(24vw, 180px);
 }
 
 .app-header h1 {
