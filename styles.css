@@ -68,6 +68,7 @@ body.dark {
 }
 
 .app-header .brand-logo {
+  border: 2px solid red;
   height: auto;
   width: min(24vw, 180px);
 }
